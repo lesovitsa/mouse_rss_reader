@@ -45,6 +45,13 @@ class FeedsController < ApplicationController
         end
     end
 
+    # GET ALL
+    def get_feeds
+        @feeds = Feed.all
+
+        render json: { feeds: @feeds }, status: 200
+    end
+
     private
 
     def create_params

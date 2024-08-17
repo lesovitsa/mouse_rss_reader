@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   post "/feeds/add", to: "feeds#add_feed"
   delete "/feeds/remove", to: "feeds#remove_feed"
   patch "/feeds/update", to: "feeds#update_feed"
+  get "/feeds/all", to: "feeds#get_feeds"
+  get "/titles", to: "rss_feeds#fetch_feeds_content"
 end
