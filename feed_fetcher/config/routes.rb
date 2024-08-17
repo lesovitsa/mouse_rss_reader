@@ -11,4 +11,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+
+  post "/feeds/add", to: "feeds#add_feed"
+  delete "/feeds/remove", to: "feeds#remove_feed"
+  patch "/feeds/update", to: "feeds#update_feed"
 end
