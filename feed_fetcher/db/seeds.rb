@@ -7,3 +7,6 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+feed1 = Feed.create(url: "http://rss.cnn.com/rss/cnn_topstories.rss")
+feed2 = Feed.create(url: "http://www.cbsnews.com/latest/rss/main")
