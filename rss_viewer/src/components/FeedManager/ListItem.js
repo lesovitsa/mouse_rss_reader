@@ -22,8 +22,6 @@ const ListItem = ({ feed, setPage }) => {
       };
 
       const onDelete = (id) => {
-        setTimeout(() => { setPage('feed') }, 5000)
-
         fetch('http://localhost:3000/feeds/remove', {
             method: 'POST',
             headers: {
@@ -33,6 +31,8 @@ const ListItem = ({ feed, setPage }) => {
                 id: id,
             }),
             })
+
+            setPage('feed')
         };
 
     if (isBeingEdited) {
