@@ -26,7 +26,7 @@ const ListItem = ({ feed, setPage }) => {
         setTimeout(() => { setPage('feed') }, 5000)
 
         fetch('http://localhost:3000/feeds/remove', {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
