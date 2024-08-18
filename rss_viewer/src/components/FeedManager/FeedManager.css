@@ -4,3 +4,9 @@
     align-self: center;
     min-height: 100vh;
 }
+
+.listItem {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

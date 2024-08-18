@@ -16,28 +16,24 @@ const TitlesList = () => {
 
   if(!articles || !articles.titles) {
     return (
-      <span>
+      <div className="spinner">
         <Spin size='large' />
-      </span>
+      </div>
     );
   }
 
-  const formattedTitles = articles.titles;
-
   return (
-    <div className="list">
-      <List size="large" bordered>
-        {articles.titles.map((title) => {
-          return (
-            <List.Item>
-              <a href={title.link} target='_blank'>
-                {title.title}
-              </a>
-            </List.Item>
-          );
-        })}
-      </List>
-    </div>
+    <List size="large" bordered>
+      {articles.titles.map((title) => {
+        return (
+          <List.Item>
+            <a href={title.link} target='_blank'>
+              {title.title}
+            </a>
+          </List.Item>
+        );
+      })}
+    </List>
   );
 }
 
