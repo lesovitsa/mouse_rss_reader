@@ -1,11 +1,12 @@
 import './App.css';
 import { EditOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { FloatButton, Menu } from 'antd';
+import { FloatButton, Typography } from 'antd';
 import { useState } from 'react';
 import TitlesList from './components/TitlesList/TitlesList.js';
 import FeedManager from './components/FeedManager/FeedManager.js';
 
 function App() {
+  const { Title } = Typography;
   const [current, setCurrent] = useState('feed');
 
   const onClick = () => {
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <div className="page">
+      <Title type='link'>Mouse's RSS Feed {current == 'feed' ? 'Reader' : 'Manager'}</Title>
       {renderCurrent()}
     </div>
   );

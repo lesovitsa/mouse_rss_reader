@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 const ListItem = ({ feed, setPage }) => {
     const [input, setInput] = useState("");
-    const onChange = (value) => { console.log(value) }
     const [isBeingEdited, setIsBeingEdited] = useState(false);
 
     const onUpdate = (id) => {

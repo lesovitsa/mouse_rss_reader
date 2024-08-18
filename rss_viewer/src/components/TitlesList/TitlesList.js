@@ -23,17 +23,19 @@ const TitlesList = () => {
   }
 
   return (
-    <List size="large" bordered>
-      {articles.titles.map((title) => {
-        return (
-          <List.Item>
-            <a href={title.link} target='_blank'>
-              {title.title}
-            </a>
-          </List.Item>
-        );
-      })}
-    </List>
+    <div className="list">
+      <List size="large" bordered>
+        {articles.titles.map((title) => {
+          return (
+            <List.Item>
+              <a href={title.link} target='_blank'>
+                {title.title}
+              </a>
+            </List.Item>
+          );
+        })}
+      </List>
+    </div>
   );
 }
 
