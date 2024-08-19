@@ -51,6 +51,10 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem 'rspec-rails'
+  gem 'phantomjs'
+  gem 'poltergeist'
+  gem 'capybara'
+  gem "capybara-webkit"
 end
 
 group :development do
