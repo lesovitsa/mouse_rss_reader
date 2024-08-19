@@ -6,13 +6,17 @@ RSpec.describe "Feeds", type: :request do
         @feed = Feed.create(url: "http://rss.cnn.com/rss/cnn_topstories.rss")
     end
 
-    scenario "Sends a post request to delete a feed" do
+    scenario "Sends a patch request to change a feed" do
 
-        post "http://localhost:3000/feeds/remove", params: {id: @feed["id"]}
+        patch "http://localhost:3000/feeds/update", params: {id: @feed["id"], url: "http://rss.cnn.com/rss/cnn_topstories.rcs"}
 
         expect(response).to have_http_status(:success)
         result = JSON.parse(response.body)["feed"]
         expect(result["id"]).to eq(@feed["id"])
-        expect { Feed.find(@feed["id"]) }.to raise_error(ActiveRecord::RecordNotFound)
+        expect(result["url"]).to eq("http://rss.cnn.com/rss/cnn_topstories.rcs")
+    end
+
+    after do
+        @feed.destroy
     end
 end
