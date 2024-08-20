@@ -15,4 +15,11 @@ RSpec.describe "Feeds", type: :request do
         expect(result["id"]).to eq(@feed["id"])
         expect { Feed.find(@feed["id"]) }.to raise_error(ActiveRecord::RecordNotFound)
     end
+
+    scenario "Sends a post request to delete a feed that does not exist" do
+
+        post "http://localhost:3000/feeds/remove", params: {id: -1}
+
+        expect(response).to have_http_status(404);
+    end
 end
