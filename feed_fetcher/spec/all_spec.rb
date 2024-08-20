@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Feeds", type: :request do
 
-    before do
+    before(:all) do
         Feed.create(url: "http://rss.cnn.com/rss/cnn_topstories.rss")
         Feed.create(url: "http://www.cbsnews.com/latest/rss/main")
         Feed.create(url: "http://www.cbsnews.com/latest/rss/main")
@@ -15,5 +15,9 @@ RSpec.describe "Feeds", type: :request do
         expect(response).to have_http_status(:success)
         feeds = JSON.parse(response.body)["feeds"]
         expect(feeds.length).to eq(3)
+    end
+
+    after(:all) do
+        Feed.all.map { |feed| feed.destroy! }
     end
 end

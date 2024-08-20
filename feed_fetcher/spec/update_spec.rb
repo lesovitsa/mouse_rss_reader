@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Feeds", type: :request do
 
-    before do
+    before(:each) do
         @feed = Feed.create(url: "http://rss.cnn.com/rss/cnn_topstories.rss")
     end
 
@@ -18,12 +18,12 @@ RSpec.describe "Feeds", type: :request do
 
     scenario "Sends a post request to add a feed with an invalid URL" do
 
-        post "http://localhost:3000/feeds/update", params: {id: @feed["id"], url: ""}
+        patch "http://localhost:3000/feeds/update", params: {id: @feed["id"], url: ""}
 
         expect(response).to have_http_status(500)
     end
 
-    after do
+    after(:each) do
         @feed.destroy
     end
 end

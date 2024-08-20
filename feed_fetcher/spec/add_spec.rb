@@ -19,4 +19,8 @@ RSpec.describe "Feeds", type: :request do
         feed = JSON.parse(response.body)
         expect(feed["error"]).to eq("Failed to create feed ")
     end
+
+    after(:all) do
+        Feed.all.map { |feed| feed.destroy! }
+    end
 end
