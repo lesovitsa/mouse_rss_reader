@@ -1,10 +1,13 @@
-import { Spin, List, Space, Input, Button } from 'antd';
+import { Spin, List, Space, Input, Button, Alert, Divider } from 'antd';
 import { useState, useEffect } from 'react';
 import ListItem from './ListItem'
 
 const FeedManager = ({ setPage }) => {
   const [rss, setRss] = useState([]);
   const [input, setInput] = useState("");
+  const [alert, setAlert] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   useEffect(() => {
     fetch('http://localhost:3000/feeds/all')
       .then((res) => {
@@ -25,13 +28,26 @@ const FeedManager = ({ setPage }) => {
             url: input,
         }),
         })
-
-        setPage('feed');
+        .then((res) => {
+          setSuccess(res.ok);
+        })
+        
+        if(!success) {
+          setTimeout(() => setAlert(false), 30000);
+          setAlert(true);
+        }
+        else {
+          setPage('feed');
+        }
     };
 
-    const onChange = (value) => { console.log(value) }
-
-
+  const Alerter = () => {
+    if (alert)
+      return (<div>
+        <Alert message="Failed to add feed" type="error" />
+        <Divider />
+      </div>);
+  }
 
   if(!rss || !rss.feeds) {
     return (
@@ -43,6 +59,7 @@ const FeedManager = ({ setPage }) => {
 
   return (
     <div className="list">
+      <Alerter />
       <List size="large" bordered>
         <List.Item>
             <Space.Compact
