@@ -3,9 +3,10 @@ import { List, Input, Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 
-const ListItem = ({ feed, setPage }) => {
+const ListItem = ({ feed, setPage, setAlert }) => {
     const [input, setInput] = useState("");
     const [isBeingEdited, setIsBeingEdited] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const onUpdate = (id) => {
       fetch('http://localhost:3000/feeds/update', {
@@ -18,7 +19,17 @@ const ListItem = ({ feed, setPage }) => {
               url: input,
           }),
           })
-          setPage('feed');
+          .then((res) => {
+            setSuccess(res.ok);
+          })
+          
+          if(!success) {
+            setTimeout(() => setAlert(false), 30000);
+            setAlert(true);
+          }
+          else {
+            setPage('feed');
+          }
       };
 
       const onDelete = (id) => {
@@ -31,8 +42,7 @@ const ListItem = ({ feed, setPage }) => {
                 id: id,
             }),
             })
-
-            setPage('feed')
+            setPage('feed');
         };
 
     if (isBeingEdited) {

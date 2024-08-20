@@ -1,6 +1,7 @@
 import { Spin, List, Space, Input, Button, Alert, Divider } from 'antd';
 import { useState, useEffect } from 'react';
-import ListItem from './ListItem'
+import ListItem from './ListItem';
+import Alerter from './Alerter';
 
 const FeedManager = ({ setPage }) => {
   const [rss, setRss] = useState([]);
@@ -41,14 +42,6 @@ const FeedManager = ({ setPage }) => {
         }
     };
 
-  const Alerter = () => {
-    if (alert)
-      return (<div>
-        <Alert message="Failed to add feed" type="error" />
-        <Divider />
-      </div>);
-  }
-
   if(!rss || !rss.feeds) {
     return (
       <div className="spinner">
@@ -59,7 +52,7 @@ const FeedManager = ({ setPage }) => {
 
   return (
     <div className="list">
-      <Alerter />
+      <Alerter alert={alert} />
       <List size="large" bordered>
         <List.Item>
             <Space.Compact
@@ -71,7 +64,7 @@ const FeedManager = ({ setPage }) => {
                 <Button type="primary" onClick={onAdd}>Submit</Button>
             </Space.Compact>
         </List.Item>
-        {rss.feeds.map((feed) => <ListItem feed={feed} setPage={setPage} />)}
+        {rss.feeds.map((feed) => <ListItem feed={feed} setPage={setPage} setAlert={setAlert} />)}
       </List>
     </div>
   );
